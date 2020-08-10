@@ -1,0 +1,61 @@
+info:
+  title: Task List
+servers:
+  http://127.0.0.1/
+path:
+  /tasks:
+    get:
+      description: returns task list
+      responses:
+        '200':
+          description: all tasks in list
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/TaskList'
+  /task:
+    post:
+      description: create new task
+      requestBody:
+        description: task to create
+        content:
+          'application/json':
+            $ref: '#/components/schemas/Task'
+      responses:
+        '200':
+          description: created task
+          content:
+            'application/json':
+              $ref: '#/components/schemas/Task'
+  /task{id}:
+    delete:
+      description: delete task by id
+      parameters:
+        - name: id
+        - in: path
+        - required: true
+      responses:
+        '200':
+          description: deleted task
+          content:
+            'application/json':
+              $ref: '#/components/schemas/Task'
+        '404':
+          description: not found
+
+components:
+  schemas:
+    Task:
+      type: object
+      properties:
+        id:
+          type: string
+        text:
+          type: string
+    TaskList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Task'
+
+
+
