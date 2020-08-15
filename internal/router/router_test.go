@@ -48,7 +48,7 @@ func TestCreateTask(t *testing.T) {
 	// Создание и кодирование в json таски
 	// Отправляем созданную таску на сервер
 	// Получаем созданную ранее таску
-	respTask := checkCreateTask(t, srv.URL, "сходить в магазин")
+	respTask := checkCreateTask(t, srv.URL, "go to a shop")
 
 	// Делаем get запрос, чтобы получить список тасок и
 	// сохраняем ответ сервера(должен был вернуться список созданных нами тасок(пока что одна))
@@ -94,7 +94,7 @@ func TestDeleteTask(t *testing.T) {
 	srv := httptest.NewServer(r.RootHandler())
 	defer srv.Close()
 
-	task := checkCreateTask(t, srv.URL+"/task", "помыть голову")
+	task := checkCreateTask(t, srv.URL+"/task", "have a shower")
 	delatask := checkDeleteTask(t, srv.URL, task.ID)
 	require.Equal(t, task, delatask)
 	checkTaskList(t, srv.URL)
